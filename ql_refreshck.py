@@ -1,7 +1,9 @@
 # 在这里输入青龙面板用户名密码，如果不填写，就自动从auth.json中读取
-username = ""
-password = ""
-
+#username = ""
+#password = ""
+# 兼容青龙面板OpenApi
+Client_ID="yS2zPxab-7zj"
+Client_Secret="fL0--j8lv6M2iAfiWP5OxYSS"
 import requests
 import time
 import json
@@ -10,36 +12,37 @@ import re
 requests.packages.urllib3.disable_warnings()
 
 token = ""
-if username == "" or password == "":
-    f = open("/ql/config/auth.json")
-    auth = f.read()
-    auth = json.loads(auth)
-    username = auth["username"]
-    password = auth["password"]
-    token = auth["token"]
-    f.close()
+# if username == "" or password == "":
+#     f = open("/ql/config/auth.json")
+#     auth = f.read()
+#     auth = json.loads(auth)
+#     username = auth["username"]
+#     password = auth["password"]
+#     token = auth["token"]
+#     f.close()
 
 
 def gettimestamp():
     return str(int(time.time() * 1000))
 
 
-def login(username, password):
-    url = "http://127.0.0.1:5700/api/login?t=%s" % gettimestamp()
-    data = {"username": username, "password": password}
-    r = s.post(url, data)
+def login(Client_ID, Client_Secret):
+    url="http://localhost:5700/open/auth/token?client_id=%s&client_secret=%s" % (Client_ID, Client_Secret)
+    #url = "http://127.0.0.1:5700/api/login?t=%s" % gettimestamp()
+    #data = {"username": username, "password": password}
+    r = s.get(url)
     s.headers.update({"authorization": "Bearer " + json.loads(r.text)["data"]["token"]})
 
 
 def getitem(key):
-    url = "http://127.0.0.1:5700/api/envs?searchValue=%s&t=%s" % (key, gettimestamp())
+    url = "http://127.0.0.1:5700/open/envs?searchValue=%s&t=%s" % (key, gettimestamp())
     r = s.get(url)
     item = json.loads(r.text)["data"]
     return item
 
 
 def getckitem(key):
-    url = "http://127.0.0.1:5700/api/envs?searchValue=JD_COOKIE&t=%s" % gettimestamp()
+    url = "http://127.0.0.1:5700/open/envs?searchValue=JD_COOKIE&t=%s" % gettimestamp()
     r = s.get(url)
     for i in json.loads(r.text)["data"]:
         if key in i["value"]:
@@ -62,7 +65,7 @@ def wstopt(wskey):
 
 
 def update(text, qlid):
-    url = "http://127.0.0.1:5700/api/envs?t=%s" % gettimestamp()
+    url = "http://127.0.0.1:5700/open/envs?t=%s" % gettimestamp()
     s.headers.update({"Content-Type": "application/json;charset=UTF-8"})
     data = {
         "name": "JD_COOKIE",
@@ -77,7 +80,7 @@ def update(text, qlid):
 
 
 def insert(text):
-    url = "http://127.0.0.1:5700/api/envs?t=%s" % gettimestamp()
+    url = "http://127.0.0.1:5700/open/envs?t=%s" % gettimestamp()
     s.headers.update({"Content-Type": "application/json;charset=UTF-8"})
     data = []
     data_json = {
