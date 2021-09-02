@@ -26,8 +26,8 @@ def gettimestamp():
     return str(int(time.time() * 1000))
 
 
-def login(Client_ID, Client_Secret):
-    url="http://localhost:5700/open/auth/token?client_id=%s&client_secret=%s" % (Client_ID, Client_Secret)
+def login(client_id, client_secret):
+    url="http://localhost:5700/open/auth/token?client_id=%s&client_secret=%s" % (client_id, client_secret)
     #url = "http://127.0.0.1:5700/api/login?t=%s" % gettimestamp()
     #data = {"username": username, "password": password}
     r = s.get(url)
@@ -98,7 +98,7 @@ def insert(text):
 if __name__ == '__main__':
     s = requests.session()
     if token == "":
-        login(username, password)
+        login(Client_ID, Client_Secret)
     else:
         s.headers.update({"authorization": "Bearer " + token})
     wskeys = getitem("JD_WSCK")
