@@ -28,6 +28,7 @@ def gettimestamp():
 
 def login(client_id, client_secret):
     url="http://localhost:5700/open/auth/token?client_id=%s&client_secret=%s" % (client_id, client_secret)
+    s.headers.update({"Content-Type": "application/json;charset=UTF-8"})
     #url = "http://127.0.0.1:5700/api/login?t=%s" % gettimestamp()
     #data = {"username": username, "password": password}
     r = s.get(url)
