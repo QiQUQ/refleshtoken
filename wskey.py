@@ -101,11 +101,7 @@ def appjmp(wskey,tokenKey):
   return True,jd_ck
 def get_sign():
  url='http://127.0.0.1:9999/api/getsign'
-qheaders = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64)", "Connection": "close"}
- s = requests.session()
-
-s.config['keep_alive'] = False
-res=requests.get(url=url)
+res=requests.get(url=url,headers={'Connection':'close'})
  sign_list=res.json()
  svv=sign_list['sv']
  stt=sign_list['st']
