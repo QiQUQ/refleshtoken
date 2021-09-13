@@ -100,7 +100,7 @@ def appjmp(wskey,tokenKey):
   print(wskey,"wskey状态正常\n")
   return True,jd_ck
 def get_sign():
- url='https://hellodns.coding.net/p/sign/d/jsign/git/raw/master/sign'
+ url='http://127.0.0.1:9999/api/getsign'
  res=requests.get(url=url,verify=False,timeout=20)
  sign_list=json.loads(res.text)
  svv=sign_list['sv']
@@ -179,7 +179,7 @@ def ql_insert(i_ck):
  print("账号添加完成")
  print("--------------------\n")
 if __name__=='__main__':
- boom()
+#  boom()
  sv,st,uuid,sign=get_sign() 
  token=ql_login() 
  s=requests.session()
