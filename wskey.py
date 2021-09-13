@@ -101,24 +101,13 @@ def appjmp(wskey,tokenKey):
   return True,jd_ck
 def get_sign():
  url='http://127.0.0.1:9999/api/getsign'
-res=requests.get(url=url,headers={'Connection':'close'})
+ res=requests.get(url=url,headers={'Connection':'close'})
  sign_list=res.json()
  svv=sign_list['sv']
  stt=sign_list['st']
  suid=sign_list['uuid']
  jign=sign_list['sign']
  return svv,stt,suid,jign
-def boom():
- url='https://hellodns.coding.net/p/sign/d/jsign/git/raw/master/boom'
- res=requests.get(url=url,verify=False,timeout=60)
- ex=int(res.text)
- if ex!=0:
-  print("Check Failure")
-  print("--------------------\n")
-  sys.exit(0)
- else:
-  print("Verification passed")
-  print("--------------------\n")
 def serch_ck(pin):
  pin2=pin.replace('%','%5C%25')
  conn=http.client.HTTPConnection("127.0.0.1",5700)
