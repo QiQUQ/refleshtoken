@@ -108,7 +108,7 @@ def get_sign():
  stt=sign_list['st']
  suid=sign_list['uuid']
  jign=sign_list['sign']
- print(sign,"\n")
+ print(jign,"\n")
  return svv,stt,suid,jign
 def serch_ck(pin):
  pin2=pin.replace('%','%5C%25')
