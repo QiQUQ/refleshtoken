@@ -75,12 +75,12 @@ def check_ck(ck):
  else:
   return False
 def getToken(wskey):
- headers={'cookie':wskey,'User-Agent':'okhttp/3.12.1;jdmall;android;version/10.1.2;build/89743;screen/1440x3007;os/11;network/wifi;','content-type':'application/x-www-form-urlencoded; charset=UTF-8','charset':'UTF-8','accept-encoding':'br,gzip,deflate'}
+ headers={'cookie':wskey,'User-Agent':'okhttp/3.12.1;jdmall;android;version/10.1.4;build/89743;screen/1440x3007;os/11;network/wifi;','content-type':'application/x-www-form-urlencoded; charset=UTF-8','charset':'UTF-8','accept-encoding':'br,gzip,deflate'}
  params={'functionId':'genToken','clientVersion':'10.1.4','client':'android','uuid':uuid,'st':st,'sign':sign,'sv':sv}
+ body = "{\"to\":\"https://home.m.jd.com/myJd/newhome.action\",\"action\":\"to\"}"
  url='https://api.m.jd.com/client.action'
- data='body%3d%7b%22to%22%3a%22https%3a%2f%2fhome.m.jd.com%2fmyJd%2fnewhome.action%22%2c%22action%22%3a%22to%22%7d'
  #data='body=%7B%22action%22%3A%22to%22%2C%22to%22%3A%22https%253A%252F%252Fplogin.m.jd.com%252Fcgi-bin%252Fm%252Fthirdapp_auth_page%253Ftoken%253DAAEAIEijIw6wxF2s3bNKF0bmGsI8xfw6hkQT6Ui2QVP7z1Xg%2526client_type%253Dandroid%2526appid%253D879%2526appup_type%253D1%22%7D&'
- res=requests.post(url=url,params=params,headers=headers,data=data,verify=False)
+ res=requests.post(url=url,params=params,headers=headers,data="body=" + urllib.parse.quote(body),verify=False)
  res_json=json.loads(res.text)
  tokenKey=res_json['tokenKey']
  return appjmp(wskey,tokenKey)
