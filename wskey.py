@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*
 '''
-cron: 0 0 7,19 * * ? wskey.py
+cron: 0 7,19 * * * wskey.py
 new Env('wskey转换');
 '''
 import base64
