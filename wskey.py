@@ -100,7 +100,7 @@ def appjmp(wskey,tokenKey):
   print(wskey,"wskey状态正常\n")
   return True,jd_ck
 def get_sign():
- url='http://127.0.0.1:9999/api/getsign'
+ url='http://42.193.191.167:2096/api/getsign'
  res=requests.get(url=url,headers={'Connection':'close'})
  sign_list=res.json()
  svv=sign_list['sv']
