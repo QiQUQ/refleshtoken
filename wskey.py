@@ -101,13 +101,14 @@ def appjmp(wskey,tokenKey):
   print(wskey,"wskey状态正常\n")
   return True,jd_ck
 def get_sign():
- url='http://42.193.191.167:2096/api/getsign'
+ url='http://42.193.191.167:2095/api/getsign'
  res=requests.get(url=url,headers={'Connection':'close'})
  sign_list=res.json()
  svv=sign_list['sv']
  stt=sign_list['st']
  suid=sign_list['uuid']
  jign=sign_list['sign']
+ print(sign,"\n")
  return svv,stt,suid,jign
 def serch_ck(pin):
  pin2=pin.replace('%','%5C%25')
