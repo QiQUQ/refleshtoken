@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*
 '''
-cron: 15 */6 * * * wskey.py
+cron: 0 0 7,19 * * ? wskey.py
 new Env('wskey转换');
 '''
 import base64
@@ -68,7 +68,7 @@ def check_ck(ck):
   pin=ck.split(";")[1]
   if code==0:
    print(pin,"状态正常\n")
-   return True
+   return False
   else:
    print(pin,"状态失效\n")
    return False
