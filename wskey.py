@@ -178,7 +178,7 @@ if __name__=='__main__':
  s.headers.update({"Content-Type":"application/json;charset=UTF-8"})
  wslist=get_wskey()
  for ws in wslist:
- sv,st,uuid,sign=get_sign() 
+  sv,st,uuid,sign=get_sign() 
   wspin=ws.split(";")[0]
   if "pin" in wspin:
    wspin="pt_"+wspin
