@@ -19,17 +19,15 @@ from urllib import parse
 result = '🏆52破解签到姬🏆\n'
 
 cookie = os.environ.get("pojie52_cookie")
-#TGBOTAPI = os.environ.get("PUSH_PLUS_TOKEN")
-# TGID = os.environ.get("TGID")
+TOKEN = os.environ.get("PUSH_PLUS_TOKEN")
 
-# def pushtg(data):
-#     global TGBOTAPI
-#     global TGID
-#     requests.post(
-#         'https://api.telegram.org/bot'+TGBOTAPI+'/sendMessage?chat_id='+TGID+'&text='+data)
+def pushtg(data):
+     global TGBOTAPI
+     global TGID
+     requests.get(
+         'http://www.pushplus.plus/send?token='+TOKEN+'&content='+data)
 
-# 【BOTAPI】格式为123456:abcdefghi
-# 【TGID】格式为123456（人）或者-100123456（群组/频道）
+
 
 def main():
     global result
@@ -54,7 +52,7 @@ def main():
         result += "签到成功失败"
     
     print(result)
-    
+    pushtg(result)
     
 def main_handler(event, context):
     main()
