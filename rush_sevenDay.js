@@ -62,10 +62,10 @@ if ($.isNode()) {
                 await pandaSevenDay();
                 await $.wait(1000);
             }
-			$.activityUrl = `https://lzkj-isv.isvjcloud.com/sign/sevenDay/signActivity2?activityId=${$.activityId}&shareuserid4minipg=&shopid=${$.venderId}&lng=00.000000&lat=00.000000&sid=&un_area=`
-            for(let a in activityIdList){
+			$.activityUrl = `https://lzkj-isv.isvjcloud.com/sign/signActivity2?activityId=${$.activityId}&venderId=${$.venderId}&adsource=tg_xuanFuTuBiao&lng=00.000000&lat=00.000000&sid=&un_area=`
+            for(let a in activityIdList2){
                 $.activityId = activityIdList2[a];
-                await pandaSevenDay();
+                await addCart();
                 await $.wait(1000);
             }
             if ($.bean > 0) {
@@ -110,7 +110,28 @@ async function pandaSevenDay() {
         $.log("没有成功获取到用户鉴权信息")
     }
 }
-
+async function addCart() {
+    await $.wait(500)
+    $.token = null;
+    $.secretPin = null;
+    $.venderId = null;
+    await getFirstLZCK()
+    await getToken();
+    await task('customer/getSimpleActInfoVo', `activityId=${$.activityId}`, 1)
+    if ($.token) {
+        await getMyPing();
+        if ($.secretPin) {
+            await task('common/accessLogWithAD', `venderId=${$.venderId}&code=${$.activityType}&pin=${encodeURIComponent($.secretPin)}&activityId=${$.activityId}&pageUrl=${$.activityUrl}&subType=app&adSource=tg_xuanFuTuBiao`, 1);
+            console.log(`签到 -> ${$.activityId}`)
+            await $.wait(1000);
+            await task('sign/wx/signUp',`actId=${$.activityId}&pin=${encodeURIComponent($.secretPin)}`,1);
+        } else {
+            $.log("没有成功获取到用户信息")
+        }
+    } else {
+        $.log("没有成功获取到用户鉴权信息")
+    }
+}
 function task(function_id, body, isCommon = 0) {
     return new Promise(resolve => {
         $.post(taskUrl(function_id, body, isCommon), async (err, resp, data) => {
@@ -144,6 +165,15 @@ function task(function_id, body, isCommon = 0) {
                                     $.activityUrl = data.act.actUrl;
                                     break;
                                 case 'sign/sevenDay/wx/signUp':
+                                    if(data){
+                                        if (data.isOk) {
+                                            console.log("签到成功");
+                                        } else {
+                                            console.log(data.msg);
+                                        }
+                                    }
+                                    break;
+								case 'sign/wx/signUp':
                                     if(data){
                                         if (data.isOk) {
                                             console.log("签到成功");
