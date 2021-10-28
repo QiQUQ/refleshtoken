@@ -62,7 +62,7 @@ if ($.isNode()) {
                 await pandaSevenDay();
                 await $.wait(1000);
             }
-			$.activityUrl = `https://lzkj-isv.isvjcloud.com/sign/signActivity2?activityId=${$.activityId}&venderId=${$.venderId}&adsource=tg_xuanFuTuBiao&lng=00.000000&lat=00.000000&sid=&un_area=`
+	    $.activityUrl = `https://lzkj-isv.isvjcloud.com/sign/signActivity2?activityId=${$.activityId}&venderId=${$.venderId}&adsource=tg_xuanFuTuBiao&lng=00.000000&lat=00.000000&sid=&un_area=`
             for(let a in activityIdList2){
                 $.activityId = activityIdList2[a];
                 await addCart();
