@@ -36,8 +36,8 @@ def main():
         'ContentType':'text/html;charset=gbk'
         'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
     }
-    requests.session().get('http://i.pcbeta.com/home.php?mod=task&do=apply&id=149',headers=headers)
-    fa=requests.session().get('http://i.pcbeta.com/home.php?mod=task&do=draw&id=149',headers=headers)
+    requests.session().get('https://i.pcbeta.com/home.php?mod=task&do=apply&id=149',headers=headers)
+    fa=requests.session().get('https://i.pcbeta.com/home.php?mod=task&do=draw&id=149',headers=headers)
     fb=BeautifulSoup(fa.text,'html.parser')         
     fc=fb.find('div',id='messagetext').find('p').text
     print("🏆pcbeta签到姬🏆\n")
