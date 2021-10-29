@@ -35,8 +35,8 @@ def main():
         'Cookie': cookie,
         'ContentType':'text/html;charset=gbk'
     }
-    requests.session().get('https://i.pcbeta.com/home.php?mod=task&do=apply&id=149',headers=headers)
-    fa=requests.session().get('https://i.pcbeta.com/home.php?mod=task&do=draw&id=149',headers=headers)
+    requests.session().get('http://i.pcbeta.com/home.php?mod=task&do=apply&id=149',headers=headers)
+    fa=requests.session().get('http://i.pcbeta.com/home.php?mod=task&do=draw&id=149',headers=headers)
     fb=BeautifulSoup(fa.text,'html.parser')         
     fc=fb.find('div',id='messagetext').find('p').text
     print("🏆pcbeta签到姬🏆\n")
