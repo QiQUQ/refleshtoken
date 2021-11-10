@@ -33,7 +33,8 @@ def main():
     global result
     headers={
         'Cookie': cookie,
-        'ContentType':'text/html;charset=gbk'
+        'ContentType':'text/html;charset=gbk',
+        'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
     }
     requests.session().get('https://www.52pojie.cn/home.php?mod=task&do=apply&id=2',headers=headers)
     fa=requests.session().get('https://www.52pojie.cn/home.php?mod=task&do=draw&id=2',headers=headers)
