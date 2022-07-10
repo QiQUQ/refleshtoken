@@ -47,6 +47,7 @@ def main():
     print(fc)
     if  "您需要先登录才能继续本操作"  in fc:
         result += "Cookie失效"
+        print(cookie)
     elif "恭喜"  in fc:
         result += "签到成功"
     elif "不是进行中的任务"  in fc:
